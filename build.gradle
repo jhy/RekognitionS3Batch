@@ -1,0 +1,51 @@
+group 'io.jhy'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // S3 SDK
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.46'
+
+    // Rekognition SDK (preview version until available on Maven Central)
+    compile files('libs/AWSRekognitionPreviewJavaClient-1.1-Nov25.jar')
+
+    // SQS SDK
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.46'
+
+    // Cloud Search SDK (could make optional)
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-cloudsearch', version: '1.11.58'
+
+    // Dynamo DB SDK
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.60'
+
+    // Apache Commons CLI (helps build the Options from command line)
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.3'
+
+    // GSON (makes json for Cloud Search)
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.0'
+
+    // Guava (hasher for index IDs)
+    compile 'com.google.guava:guava:20.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+// makes an executable fat jar (code + dependencies)
+jar {
+    manifest {
+        attributes("Main-Class": "io.jhy.rekognition.s3batch.Main" )
+    }
+
+    from {
+        (configurations.runtime).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+}
