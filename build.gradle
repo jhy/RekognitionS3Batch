@@ -13,8 +13,8 @@ dependencies {
     // S3 SDK
     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.46'
 
-    // Rekognition SDK (preview version until available on Maven Central)
-    compile files('libs/AWSRekognitionPreviewJavaClient-1.1-Nov25.jar')
+    // Rekognition SDK
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.62'
 
     // SQS SDK
     compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.46'
