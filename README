@@ -49,3 +49,5 @@ usage: scanner [-cloudsearch <arg>] [-concurrency <arg>]
  -profile <arg>       AWS Credential Profile Name (in ~/.aws/credentials).
                       Default 'default'
  -queue <arg>         SQS Queue to fetch tasks from.
+ -tagprefix <arg>     S3 label tag prefix. Default 'rek.'
+ -tagS3               Write detected labels back to S3 as Object Tags.
