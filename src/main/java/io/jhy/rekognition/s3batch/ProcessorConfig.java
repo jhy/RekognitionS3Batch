@@ -23,6 +23,8 @@ public class ProcessorConfig {
         o.addOption(Option.builder("help").desc("Get this help.").build());
         o.addOption(Option.builder("dynamo").desc("Dynamo DB table to optionally insert into.").hasArg().build());
         o.addOption(Option.builder("cloudsearch").desc("Cloud Search index to optionally insert into.").hasArg().build());
+        o.addOption(Option.builder("tagS3").desc("Write detected labels back to S3 as Object Tags.").build());
+        o.addOption(Option.builder("tagprefix").desc("S3 label tag prefix. Default 'rek.'").hasArg().build());
         o.addOption(Option.builder("max").desc("Max number of images to index.").hasArg().build());
         o.addOption(
             Option.builder("concurrency").desc("Number of concurrent Rekognition jobs. Default 20").hasArg().build());
@@ -66,6 +68,14 @@ public class ProcessorConfig {
 
     boolean wantDynamo() {
         return args.hasOption("dynamo");
+    }
+
+    boolean wantTags3() {
+        return args.hasOption("tagS3");
+    }
+
+    String tagPrefix() {
+        return args.getOptionValue("tagprefix", "rek.");
     }
 
     boolean disableCerts() {

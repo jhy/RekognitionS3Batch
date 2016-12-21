@@ -14,6 +14,7 @@ import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
 import io.jhy.rekognition.s3batch.processor.CloudSearchIndexer;
 import io.jhy.rekognition.s3batch.processor.DynamoWriter;
 import io.jhy.rekognition.s3batch.processor.LabelProcessor;
+import io.jhy.rekognition.s3batch.processor.S3ObjectTagger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +68,8 @@ public class Processor {
             processors.add(new CloudSearchIndexer(creds, config.cloudSearch()));
         if (config.wantDynamo())
             processors.add(new DynamoWriter(creds, config.dynamo()));
+        if (config.wantTags3())
+            processors.add(new S3ObjectTagger(creds, config.tagPrefix()));
 
         // Executor Service
         int maxWorkers = Integer.parseInt(config.concurrency());
@@ -123,8 +126,9 @@ public class Processor {
 
     private void processTask(Message message) {
         String path = message.getBody();
-        String bucket = path.substring(0, path.indexOf('/'));
-        String key = path.substring(bucket.length() + 1);
+        PathSplit pathComp = new PathSplit(path);
+        String bucket = pathComp.bucket;
+        String key = pathComp.key;
         Logger.Info("Processing %s %s", bucket, key);
 
         // Rekognition: Detect Labels from S3 object
@@ -145,5 +149,15 @@ public class Processor {
     public Processor addLabelProcessor(LabelProcessor processor) {
         processors.add(processor);
         return this;
+    }
+
+    static public class PathSplit {
+        public final String bucket;
+        public final String key;
+
+        public PathSplit(String path) {
+            bucket = path.substring(0, path.indexOf('/'));
+            key = path.substring(bucket.length() + 1);
+        }
     }
 }
