@@ -9,8 +9,8 @@ This example provides two programs:
 You can run these commands locally and drive a high throughput of image analysis, as this program
 is executing the processing and network transfers within AWS.
 
-The examples can be run from the command line or by incorpraring into your existing codebase.You
-can modify the code to run different image analysis, or to add different downstram processing (like
+The examples can be run from the command line or by incorporating into your existing codebase.You
+can modify the code to run different image analysis, or to add different downstream processing (like
 writing to RDS, Elastic Search, or your on-premise DBs).
 
 The scanner can be run in parallel to the processor; the processor monitors SQS and starts executing
