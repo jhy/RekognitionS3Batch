@@ -11,19 +11,19 @@ repositories {
 
 dependencies {
     // S3 SDK
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.69'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.144'
 
     // Rekognition SDK
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.69'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-rekognition', version: '1.11.144'
 
     // SQS SDK
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.69'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-sqs', version: '1.11.144'
 
     // Cloud Search SDK (could make optional)
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-cloudsearch', version: '1.11.69'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-cloudsearch', version: '1.11.144'
 
     // Dynamo DB SDK
-    compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.69'
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.11.144'
 
     // Apache Commons CLI (helps build the Options from command line)
     compile group: 'commons-cli', name: 'commons-cli', version: '1.3'
